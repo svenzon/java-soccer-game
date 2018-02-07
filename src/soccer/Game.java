@@ -17,13 +17,17 @@ public class Game {
     public Team awayTeam;
     public Goal[] goals;
     
-    public void playGame() {
-        int numberOfGoals = (int)(Math.random() * 7);
+    void playGame(int maxGoals) {
+        int numberOfGoals = (int)(Math.random() * (maxGoals + 1));
         
         Goal[] theGoals = new Goal[numberOfGoals];
         this.goals = theGoals;
         
         GameUtils.addGameGoals(this);
+    }
+    
+    public void playGame() {
+        playGame(6);
     }
     
     public String getGameDesc () {

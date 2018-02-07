@@ -13,8 +13,11 @@ public class League {
     public static void main(String[] args) {
         
         //Call methods to create teams, assign them to a game
-        Team[] theTeams = createTeams();
-        Game[] theGames = createGames(theTeams);
+        League theLeague = new League();
+        Team theTeam = new Team();
+        
+        Team[] theTeams = theLeague.createTeams();
+        Game[] theGames = theLeague.createGames(theTeams);
         Game currGame = theGames[0];
         currGame.playGame();
         
@@ -24,7 +27,7 @@ public class League {
         //game1.goals[0].thePlayer.sayCatchphrase();
     }
     
-    public static Team[] createTeams() {
+    public Team[] createTeams() {
         // Create first team and place players in array
         Team team1 = new Team();
         team1.teamName = "The Synths";
@@ -61,7 +64,7 @@ public class League {
         return theTeams;
     }
         
-    public static Game[] createGames(Team[] theTeams) {
+    public Game[] createGames(Team[] theTeams) {
         Game theGame = new Game();
         theGame.homeTeam = theTeams[0];
         theGame.awayTeam = theTeams[1];

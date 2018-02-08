@@ -9,9 +9,9 @@ public class Player {
     private String playerName;
     private String catchPhrase;
     
-    public Player(String playerName, String catchPhrase) {
+    public Player(String playerName /*String catchPhrase*/) {
         this.playerName = playerName;
-        this.catchPhrase = catchPhrase;
+        //this.catchPhrase = catchPhrase;
     }
     
     public Player() {

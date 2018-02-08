@@ -45,8 +45,10 @@ public class Game {
             //Check who scored and add to score variable
             if (currGoal.getTheTeam() == homeTeam) {
                 homeTeamGoals++;
+                homeTeam.incGoalsTotal(1);
             } else {
                 awayTeamGoals++;
+                awayTeam.incGoalsTotal(1);
             }
             
             //Print score time, scoring player and their team name

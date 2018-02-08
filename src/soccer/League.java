@@ -14,63 +14,73 @@ public class League {
         
         //Call methods to create teams, assign them to a game
         League theLeague = new League();
-        Team theTeam = new Team();
         
         Team[] theTeams = theLeague.createTeams();
         Game[] theGames = theLeague.createGames(theTeams);
-        Game currGame = theGames[0];
-        currGame.playGame();
         
-        System.out.println(currGame.getGameDesc());
+        for (Game currGame: theGames) {
+            currGame.playGame();
+            System.out.println(currGame.getGameDesc());
+        }
         
-        //Print the scoring player's catchphrase
-        //game1.goals[0].thePlayer.sayCatchphrase();
+        theLeague.showBestTeam(theTeams);
     }
     
     public Team[] createTeams() {
         // Create first team and place players in array
-        Team team1 = new Team();
-        team1.teamName = "The Synths";
-        team1.playerArray = new Player[3];
-        team1.playerArray[0] = new Player("Dave Gahan", "I'll make you a believer");
-        team1.playerArray[1] = new Player("Liz Enthusiasm", "I just wanna rock");
-        team1.playerArray[2] = new Player("Karin Dreijer", "Pass this on, won't you");
+        Team team1 = new Team("The Synths");
+        team1.setPlayerArray(new Player[3]);
+        team1.getPlayerArray()[0] = new Player("Dave Gahan", "I'll make you a believer");
+        team1.getPlayerArray()[1] = new Player("Liz Enthusiasm", "I just wanna rock");
+        team1.getPlayerArray()[2] = new Player("Karin Dreijer", "Pass this on, won't you");
 
         //Create second team and populate array with players
-        Team team2 = new Team();
-        team2.teamName = "The Punks";
-        team2.playerArray = new Player[3];
-        team2.playerArray[0] = new Player("Jello Biafra", "California uber alles");
-        team2.playerArray[1] = new Player("Poly Styrene", "Up yours");
-        team2.playerArray[2] = new Player("Kim Gordon", "Incinerate");
+        Team team2 = new Team("The Punks");
+        team2.setPlayerArray(new Player[3]);
+        team2.getPlayerArray()[0] = new Player("Jello Biafra", "California uber alles");
+        team2.getPlayerArray()[1] = new Player("Poly Styrene", "Up yours");
+        team2.getPlayerArray()[2] = new Player("Kim Gordon", "Incinerate");
 
         //Third team
-        Team team3 = new Team();
-        team3.teamName = "The Progs";
-        team3.playerArray = new Player[3];
-        team3.playerArray[0] = new Player("Robert Fripp", "Black rack barbed wire");
-        team3.playerArray[1] = new Player("Keith Emerson", "(Pipe organ solo)");
-        team3.playerArray[2] = new Player("Jon Anderson", "I'll be the roundabout");
+        Team team3 = new Team("The Progs");
+        team3.setPlayerArray(new Player[3]);
+        team3.getPlayerArray()[0] = new Player("Robert Fripp", "Black rack barbed wire");
+        team3.getPlayerArray()[1] = new Player("Keith Emerson", "(Pipe organ solo)");
+        team3.getPlayerArray()[2] = new Player("Jon Anderson", "I'll be the roundabout");
 
         //Fourth team
-        Team team4 = new Team();
-        team4.teamName = "The Emcees";
-        team4.playerArray = new Player[3];
-        team4.playerArray[0] = new Player("Erykah Badu", "");
-        team4.playerArray[1] = new Player("Kendrick Lamar", "Don't kill my vibe");
-        team4.playerArray[2] = new Player("Mike Eagle", "I'm giant");
+        Team team4 = new Team("The Emcees");
+        team4.setPlayerArray(new Player[3]);
+        team4.getPlayerArray()[0] = new Player("Erykah Badu", "Don't believe everything you think");
+        team4.getPlayerArray()[1] = new Player("Kendrick Lamar", "Don't kill my vibe");
+        team4.getPlayerArray()[2] = new Player("Mike Eagle", "I'm giant");
             
         Team [] theTeams = {team1, team2, team3, team4};
         return theTeams;
     }
         
     public Game[] createGames(Team[] theTeams) {
-        Game theGame = new Game();
-        theGame.homeTeam = theTeams[0];
-        theGame.awayTeam = theTeams[1];
-        Game[] theGames = {theGame};
-            
+        Game theGame1 = new Game(theTeams[0], theTeams[1]);
+        Game theGame2 = new Game(theTeams[0], theTeams[2]);
+        Game theGame3 = new Game(theTeams[1], theTeams[3]);
+        Game theGame4 = new Game(theTeams[2], theTeams[1]);
+        Game[] theGames = {theGame1, theGame2, theGame3, theGame4};
         return theGames;
+    }
+    
+    public void showBestTeam(Team[] theTeams) {
+        Team currBestTeam = theTeams[0];
+        System.out.println("\nTeam Points");
+        
+        for(Team currTeam: theTeams) {
+            System.out.println(currTeam.getTeamName() + ": " +
+                    currTeam.getPointsTotal());
+            currBestTeam = currTeam.getPointsTotal() >
+                    currBestTeam.getPointsTotal() ? currTeam: currBestTeam;
+        }
+        
+        System.out.println("Winner of the league is " 
+                + currBestTeam.getTeamName());
     }
 }
 

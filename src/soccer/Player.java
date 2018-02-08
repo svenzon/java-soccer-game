@@ -6,19 +6,39 @@ package soccer;
  */
 public class Player {
     
-    public String playerName;
-    public String catchPhrase;
+    private String playerName;
+    private String catchPhrase;
     
-    public Player(String name, String phrase) {
-        this.playerName = name;
-        this.catchPhrase = phrase;
+    public Player(String playerName, String catchPhrase) {
+        this.playerName = playerName;
+        this.catchPhrase = catchPhrase;
+    }
+    
+    public Player() {
+        
     }
     
     public void sayCatchphrase() {
-        if(catchPhrase.length() > 0) {
-            System.out.println('"' + catchPhrase + '!' + '"');
+        if(getCatchPhrase().length() > 0) {
+            System.out.println('"' + getCatchPhrase() + '!' + '"');
         } else {
             System.out.println("!");
         }
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+    
+    public String getCatchPhrase() {
+        return catchPhrase;
+    }
+
+    public void setCatchPhrase(String catchPhrase) {
+        this.catchPhrase = catchPhrase;
     }
 }

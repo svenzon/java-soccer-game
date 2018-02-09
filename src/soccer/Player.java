@@ -8,6 +8,7 @@ public class Player {
     
     private String playerName;
     private String catchPhrase;
+    private int goalsScored;
     
     public Player(String playerName /*String catchPhrase*/) {
         this.playerName = playerName;
@@ -25,6 +26,10 @@ public class Player {
             System.out.println("!");
         }
     }
+    
+    public void incGoalsScored() {
+        this.goalsScored++;
+    }
 
     public String getPlayerName() {
         return playerName;
@@ -40,5 +45,13 @@ public class Player {
 
     public void setCatchPhrase(String catchPhrase) {
         this.catchPhrase = catchPhrase;
+    }
+
+    public int getGoalsScored() {
+        return goalsScored;
+    }
+
+    public void setGoalsScored(int goalsScored) {
+        this.goalsScored = goalsScored;
     }
 }

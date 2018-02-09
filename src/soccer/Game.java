@@ -65,6 +65,8 @@ public class Game {
                         awayTeamGoals++;
                         awayTeam.incGoalsTotal(1);
                     }
+                    
+                    currEvent.getThePlayer().incGoalsScored();
                 }
                 //Print score time, scoring player and their team name
                 gameDesc.append(currEvent + " after " + currEvent.getTheTime() + 

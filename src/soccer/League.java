@@ -1,7 +1,7 @@
 package soccer;
 import java.util.*;
 import java.time.*;
-import utility.PlayerDatabase;
+import utility.*;
 
 /**
  *
@@ -17,20 +17,25 @@ public class League {
         //Call methods to create teams, assign them to a game
         League theLeague = new League();
         
-        Team[] theTeams = theLeague.createTeams("The Synths,The Progs,The Punks,The Emcees", 3);
-        Game[] theGames = theLeague.createGames(theTeams);
-        
-        System.out.println(theLeague.getLeagueAnnouncement(theGames));
-        
-        for (Game currGame: theGames) {
-            currGame.playGame();
-            System.out.println(currGame.getGameDesc());
+        try {
+            Team[] theTeams = theLeague.createTeams("The Synths,The Progs,The Punks,The Emcees", 3);
+            Game[] theGames = theLeague.createGames(theTeams);
+
+            System.out.println(theLeague.getLeagueAnnouncement(theGames));
+
+            for (Game currGame: theGames) {
+                currGame.playGame();
+                System.out.println(currGame.getGameDesc());
+            }
+
+            theLeague.showBestTeam(theTeams);
+            theLeague.showBestPlayers(theTeams);
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
         }
-        
-        theLeague.showBestTeam(theTeams);
     }
     
-    public Team[] createTeams(String teamNames, int teamSize) {
+    public Team[] createTeams(String teamNames, int teamSize) throws PlayerDatabaseException {
         PlayerDatabase playerDB = new PlayerDatabase();
         StringTokenizer teamNameTokens = new StringTokenizer(teamNames, ",");
         
@@ -76,10 +81,30 @@ public class League {
         System.out.println("Winner of the league is " + currBestTeam.getTeamName());
     }
     
+    public void showBestPlayers(Team[] theTeams) {
+        ArrayList <Player> thePlayers = new ArrayList();
+        
+        for(Team currTeam: theTeams) {
+            thePlayers.addAll(Arrays.asList(currTeam.getPlayerArray()));
+        }
+        
+        Collections.sort(thePlayers, (p1, p2) ->
+            Double.valueOf(p2.getGoalsScored()).compareTo
+            (Double.valueOf(p1.getGoalsScored())));
+        System.out.println("\n\nBest Players");
+        
+        thePlayers.forEach((currPlayer) -> {
+            System.out.println(currPlayer.getPlayerName() + " : " + 
+                    currPlayer.getGoalsScored());
+        });
+        
+    }
+    
     public String getLeagueAnnouncement (Game[] theGames) {
         Period thePeriod = Period.between(theGames[0].getTheDateTime().toLocalDate(),
                 theGames[theGames.length - 1].getTheDateTime().toLocalDate());
         return "The League is scheduled to run for " + thePeriod.getMonths() +
                 " month(s), and " + thePeriod.getDays() + " day(s).\n";
     }
+    
 }
